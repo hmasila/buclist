@@ -5,28 +5,23 @@ RSpec.describe BucketList, type: :model do
   it { should have_many :items }
   it { should validate_presence_of :name }
 
-  describe '.search_by_name' do
-    let!(:bucket_list) { create(:bucket_list, name: 'December') }
+  describe '.search' do
+    name = Faker::StarWars.character
+    let!(:bucket_list) { create(:bucket_list, name: name) }
     context 'when query exists' do
       it 'returns the bucketlist' do
-        expect(BucketList.search_by_name('December')).to eql
-        Bucketlist.where('name LIKE ?', 'December').first
-      end
-    end
-
-    context 'when query does not exist' do
-      it 'raises ActiveRecord::RecordNotFound error' do
-        expect(BucketList.search_by_name('February'))
-          .to raise_error(ActiveRecord::RecordNotFound, /February not found/)
+        expect(BucketList.search(name)).to include bucket_list
       end
     end
   end
 
   describe '.paginate' do
-    let!(:bucket_lists) { create_list(:bucket_list, 5) }
-    it 'returns the first n bucket lists' do
-      expect(Bucketlist.paginate(limit: 2, page: 1).first).to eq(
-        Bucketlist.limit(2).offset(0).first
+    let!(:bucket_lists) { create_list(:bucket_list, 50) }
+    it 'returns bucket lists per page' do
+      per_page = 20
+      page = 1
+      expect(BucketList.paginate(page, per_page)).to eq(
+        BucketList.limit(20).offset(1)
       )
     end
   end
