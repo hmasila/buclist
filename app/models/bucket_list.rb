@@ -6,7 +6,7 @@ class BucketList < ApplicationRecord
 
   scope :search, -> (name) { where('name ILIKE ?', "%#{name}%") }
 
-  scope :paginate, lambda do |parameters|
+  scope :paginate, (lambda do |parameters|
     limit(parameters[:limit]).offset(parameters[:offset])
-  end
+  end)
 end
