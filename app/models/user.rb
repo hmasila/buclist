@@ -12,4 +12,7 @@ class User < ApplicationRecord
             presence: true,
             uniqueness: true,
             format: { with: VALID_EMAIL }
+  validates :password,
+            presence: true,
+            length: { minimum: 5 }
 end
