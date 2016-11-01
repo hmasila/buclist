@@ -41,7 +41,7 @@ Style/IfUnlessModifier:
   Enabled: false
   MaxLineLength: 80
 Style/OptionHash:
-  Description: Don't use option hashes when you can use keyword arguments.
+  Description: Don"t use option hashes when you can use keyword arguments.
   Enabled: false
 Style/PercentLiteralDelimiters:
   Description: Use `%`-literal delimiters consistently
@@ -164,7 +164,7 @@ Metrics/PerceivedComplexity:
   Enabled: false
   Max: 7
 Lint/AssignmentInCondition:
-  Description: Don't use assignment in conditions.
+  Description: Don"t use assignment in conditions.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#safe-assignment-in-condition
   Enabled: false
   AllowSafeAssignment: true
@@ -214,7 +214,7 @@ Style/SpecialGlobalVars:
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#no-cryptic-perlisms
   Enabled: false
 Style/VariableInterpolation:
-  Description: Don't interpolate global, instance and class variables directly in
+  Description: Don"t interpolate global, instance and class variables directly in
     strings.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#curlies-interpolate
   Enabled: false
@@ -226,7 +226,7 @@ Lint/EachWithObjectArgument:
   Description: Check for immutable argument given to each_with_object.
   Enabled: true
 Lint/HandleExceptions:
-  Description: Don't suppress exception.
+  Description: Don"t suppress exception.
   StyleGuide: https://github.com/bbatsov/ruby-style-guide#dont-hide-exceptions
   Enabled: false
 Lint/LiteralInCondition:
