@@ -1,6 +1,6 @@
 FactoryGirl.define do
-  factory :token do
-    token "MyString"
-    user nil
+  factory :used_token do
+    token
+    user
   end
 end
