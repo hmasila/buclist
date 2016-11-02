@@ -1,20 +1,35 @@
 require "rails_helper"
 
 RSpec.describe "Bucket_list items", type: :request do
-  let(:bucket) { create(:bucket_list) }
-  let!(:items) { create_list(:item, 10, bucket_list: bucket) }
+  describe "GET #index" do
+    let(:bucket) { create(:bucket_list) }
+    let!(:items) { create_list(:item, 10, bucket_list: bucket) }
+    let(:bucket_id) { 1 }
 
-  describe "GET /bucket_lists/:bucket_id/items" do
     context "when authentication token is passed" do
-      let!(:req) do
-        get "/bucketlists/1/items", {}, HTTP_AUTHORIZATION: "token #{token_helper}",
-                                                   HTTP_ACCEPT: "application/vnd.buclist.v1+json"
-      end
+      let!(:req) { get "/bucket_lists/#{bucket_id}/items", {}, valid_headers }
       context "when user's bucket_list has items" do
-        it "returns a success status" do
-          expect(response.status).to eql 200
+        it_behaves_like "a http response", 200
+        it "retrieves all items for bucket list" do
+          expect(json.count).to eq(10)
+          expect(json[0][:name]).to eq(item[0].name)
         end
       end
+      context "when bucket_list has no items" do
+        it "returns an empty json" do
+          Item.destroy_all
+          expect(json.count).to eq(0)
+        end
+      end
+
+      context "when bucket_list does not exist" do
+        let(:bucket_id) { 0 }
+        it_behaves_like("route not found")
+      end
+    end
+
+    include_context "unauthenticated request" do
+      before { get "/bucket_lists/#{bucket_id}/items", {}, invalid_headers }
     end
   end
 end

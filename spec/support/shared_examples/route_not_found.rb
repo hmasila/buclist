@@ -1,8 +1,4 @@
-RSpec.shared_examples "route not found" do |verb, route|
-  before do
-    send(verb, route)
-  end
-
+RSpec.shared_examples "route not found" do
   context "when the route does not exist" do
     it "returns a 404 response status" do
       expect(response.status).to eq(404)
