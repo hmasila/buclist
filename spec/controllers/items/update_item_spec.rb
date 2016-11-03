@@ -2,12 +2,14 @@ require "rails_helper"
 
 RSpec.describe "Bucket_list items", type: :request do
   describe "PUT #update" do
-    let!(:bucket_list) { create(:bucket_list) }
-    let!(:item) { create(:item) }
+    let(:user) { create(:user) }
+    let!(:bucket) { create(:bucket_list) }
+    let!(:item) { create(:item, bucket_list: bucket) }
     let(:id) { item.id }
     let(:params) { { name: "StarWars" }.to_json }
 
     context "when an authentication token is passed" do
+      let(:headers) { valid_headers }
       let!(:req) do
         put "/bucket_lists/1/items/#{id}", params, valid_headers
       end
