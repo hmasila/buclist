@@ -1,6 +1,6 @@
 class  ApplicationController < ActionController::API
   include Response
-  config.autoload_paths << Rails.root.join("lib")
+
   before_action :authenticate_request
 
   private
