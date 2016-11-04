@@ -1,15 +1,22 @@
 require "rails_helper"
 
-RSpec.describe "User requstration", type: :request do
+RSpec.describe UsersController, type: :controller do
   let(:params) { attributes_for(:user) }
-  let(:headers) { headers }
   let!(:existing_user) { create(:user) }
 
-  describe "POST /signup" do
-    let!(:req) { post "/signup", params, headers }
+  describe "POST #create" do
+    let!(:req) { post :create, params: params }
 
     context "when a new user signs up" do
-      it_behaves_like "a http response", 201, /Account created successfully/
+      it_behaves_like "a http response", 201, "Account created successfully"
+
+      it "creates a new user" do
+        expect(User.count).to eq(1)
+      end
+
+      it "returns an authentication token" do
+        expect(json["auth_token"]).not_to be_nil
+      end
     end
 
     context "when and existing user signs up" do
@@ -20,7 +27,7 @@ RSpec.describe "User requstration", type: :request do
         }
       end
 
-      it_behaves_like "a http response", 422, /User already exists/
+      it_behaves_like "a http response", 422, "User already exists"
     end
 
     context "when a new user signs up with the invalid parameters" do
@@ -31,7 +38,7 @@ RSpec.describe "User requstration", type: :request do
         }
       end
 
-      it_behaves_like "a http response", 422, /Account could not be created/
+      it_behaves_like "a http response", 422, "Account could not be created"
     end
   end
 end

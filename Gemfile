@@ -6,6 +6,7 @@ gem "puma", "~> 3.0"
 gem "bcrypt", "~> 3.1.7"
 gem "jwt"
 gem "faker"
+gem "simple_command"
 
 group :development, :test do
   gem "pry-rails"
