@@ -2,6 +2,7 @@ require "rails_helper"
 
 RSpec.describe "User logs in", type: :request do
   let(:user) { create(:user) }
+  let(:headers) { valid_headers}
   let(:params) do
     {
       email: user.email,

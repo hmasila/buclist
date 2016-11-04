@@ -1,4 +1,6 @@
 class  ApplicationController < ActionController::API
+  include Response
+  config.autoload_paths << Rails.root.join("lib")
   before_action :authenticate_request
 
   private
@@ -9,7 +11,7 @@ class  ApplicationController < ActionController::API
   end
 
   def token_not_authorized
-    render json: { error: not_authorized_message }, status: 401
+    json_response(message: not_authorized_message, status: 401)
   end
 
   def decode_auth_header
