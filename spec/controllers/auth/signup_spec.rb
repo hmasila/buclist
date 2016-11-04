@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe "User requstration", type: :request do
   let(:params) { attributes_for(:user) }
-  let(:headers) { headers }
+  # let(:headers) { headers }
   let!(:existing_user) { create(:user) }
 
   describe "POST /signup" do

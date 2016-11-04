@@ -1,12 +1,11 @@
-module Api
-  class ApiConstraints
-    def initialize(options)
-      @version = options[:version]
-      @default = options[:default]
-    end
 
-    def matches?(req)
-      @default || req.headers["Accept"].include?("application/vnd.buclist.v#{@version}+json")
-    end
+class ApiConstraints
+  def initialize(options)
+    @version = options[:version]
+    @default = options[:default]
   end
-end
+
+  def matches?(req)
+    @default || req.headers["Accept"].include?("application/vnd.buclist.v#{@version}+json")
+  end
+  end
