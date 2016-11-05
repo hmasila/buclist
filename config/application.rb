@@ -26,6 +26,7 @@ module Buclist
     # Middleware like session, flash, cookies can be added back manually.
     # Skip views, helpers and assets when generating a new resource.
     config.autoload_paths << Rails.root.join("lib")
+    # config.active_record.raise_in_transactional_callbacks = true
     config.generators do |g|
       g.test_framework :rspec, fixture: true
       g.fixture_replacement :factory_girl, dir: "spec/factories"

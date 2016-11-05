@@ -4,6 +4,6 @@ RSpec.shared_examples "a http response" do |status, message = nil|
   end
 
   it "returns a #{status} message" do
-    expect(json["message"]).to match(message)
+    expect(json["message"]).to eq(message)
   end if message
 end
