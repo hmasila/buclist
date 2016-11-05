@@ -3,8 +3,8 @@ module HelperSpecs
     JSON.parse(response.body)
   end
 
-  def token(user_id)
-    JsonWebToken.encode(user_id: user_id)
+  def token(user)
+    JsonWebToken.encode(user_id: user.id)
   end
 
   def expired_token(user_id)
@@ -12,12 +12,12 @@ module HelperSpecs
   end
 
   def valid_headers
-    { authorization: token(1) }
+    headers.merge("Authorization" => token(user))
   end
 
   def headers
     {
-      accept: "application/vnd.buclist.v1+json"
+      "Accept" => "application/vnd.buclist.v1+json"
     }
   end
 end
