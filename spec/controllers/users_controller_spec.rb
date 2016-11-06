@@ -1,17 +1,20 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
+  let(:user) { build(:user) }
   let(:params) { attributes_for(:user) }
   let!(:existing_user) { create(:user) }
 
   describe "POST #create" do
-    let!(:req) { post :create, params: params }
-
     context "when a new user signs up" do
+      let!(:req) { post :create, params: params }
+
       it_behaves_like "a http response", 201, "Account created successfully"
 
       it "creates a new user" do
-        expect(User.count).to eq(1)
+        expect do
+          response
+        end.to change(User, :count).by(1)
       end
 
       it "returns an authentication token" do
@@ -26,6 +29,7 @@ RSpec.describe UsersController, type: :controller do
           password: existing_user.password
         }
       end
+      let!(:req) { post :create, params: params }
 
       it_behaves_like "a http response", 422, "User already exists"
     end
@@ -37,6 +41,7 @@ RSpec.describe UsersController, type: :controller do
           password: nil
         }
       end
+      let!(:req) { post :create, params: params }
 
       it_behaves_like "a http response", 422, "Account could not be created"
     end

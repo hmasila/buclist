@@ -22,7 +22,7 @@ RSpec.describe "Create an item", type: :request do
       context "when an invalid request" do
         let(:params) {}
         it_behaves_like "a http response", 422,
-                        /Validation failed: Name can't be blank/
+                        "Validation failed: Name can't be blank"
       end
 
       context "when route not found" do
@@ -31,11 +31,6 @@ RSpec.describe "Create an item", type: :request do
       end
     end
 
-    include_context "unauthenticated request" do
-      before do
-        let(:headers) { headers }
-        post "/bucket_lists/1/items", params, headers
-      end
-    end
+    include_context "unauthenticated request"
   end
 end
