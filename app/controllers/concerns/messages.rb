@@ -26,4 +26,8 @@ module Messages
   def invalid_login_message
     "Invalid Credentials Detected"
   end
+
+  def expired_token_message
+    "This token has expired"
+  end
 end

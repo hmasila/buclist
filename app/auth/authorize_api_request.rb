@@ -9,6 +9,10 @@ class AuthorizeApiRequest
     user
   end
 
+  def token
+    http_auth_header
+  end
+
   private
 
   attr_reader :headers
