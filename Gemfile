@@ -7,6 +7,7 @@ gem "bcrypt", "~> 3.1.7"
 gem "jwt"
 gem "faker"
 gem "simple_command"
+gem "active_model_serializers"
 
 group :development, :test do
   gem "pry-rails"

@@ -6,8 +6,8 @@ class User < ApplicationRecord
 
   VALID_EMAIL = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
-  # validates :firstname, presence: true
-  # validates :lastname, presence: true
+  # validates :firstname, :lastname, presence: true
+  # validates  presence: true
   validates :email,
             presence: true,
             uniqueness: true,
@@ -15,4 +15,8 @@ class User < ApplicationRecord
   validates :password,
             presence: true,
             length: { minimum: 5 }
+
+  def full_name
+    "#{firstname} #{lastname}"
+  end
 end
