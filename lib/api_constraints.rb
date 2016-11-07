@@ -2,10 +2,10 @@ class ApiConstraints
   attr_reader :version
 
   def initialize(options)
-    @version = options[:version]
+    @version = options.fetch(:version)
   end
 
   def matches?(req)
-    req.headers["Accept"].include?("application/vnd.buclist.v#{@version}+json")
+    req.headers.fetch(:accept).include?("version=#{version}")
   end
 end
