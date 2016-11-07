@@ -17,7 +17,7 @@ RSpec.describe "List all bucketlists", type: :request do
 
   context "when the user doesn't have any bucketlists" do
     it "returns an empty json" do
-      BucketList.destroy_all
+      Bucketlist.destroy_all
       expect(json.count).to eq(0)
     end
   end
