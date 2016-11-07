@@ -1,17 +1,15 @@
 class BucketListsController < ApplicationController
-  before_action only: [:show, :update, :destroy] do
-    set_bucketlist(params[:id])
-  end
+  before_action :set_bucketlist, only: [:show, :update, :destroy]
+  before_action :user_bucketlists, only: [:index, :create]
 
   def index
-    @bucketlists = search_and_paginate || paginate_only
-    json_response(@bucketlists)
+    queried_bucketlists = search_and_paginate || paginate_only
+    json_response(queried_bucketlists)
   end
 
   def create
-    @bucketlist = @current_user.bucketlists.new(list_params)
-    @bucketlist.save!
-    json_response(@bucketlist, :created)
+    new_bucketlist = @bucketlists.new(list_params).save!
+    json_response(new_bucketlist, :created)
   end
 
   def update
@@ -31,14 +29,14 @@ class BucketListsController < ApplicationController
   private
 
   def list_params
-    params.permit(:name, :created_by)
+    params.permit(:name, :user_id)
   end
 
   def search_and_paginate
-    @current_user.bucket_lists.search(params[:q]).paginate(params) if params[:q]
+    @bucketlists.search(params[:q]).paginate(params) if params[:q]
   end
 
   def paginate_only
-    @current_user.bucketlists.paginate(params)
+    @bucketlists.paginate(params)
   end
 end
