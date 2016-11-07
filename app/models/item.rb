@@ -1,7 +1,7 @@
 class Item < ApplicationRecord
   extend Pagination
 
-  belongs_to :bucket_list
+  belongs_to :bucketlist
 
   validates :name,
             presence: true

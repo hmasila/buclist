@@ -15,21 +15,21 @@ ActiveRecord::Schema.define(version: 20161028090154) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "bucket_lists", force: :cascade do |t|
+  create_table "bucketlists", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_bucket_lists_on_user_id", using: :btree
+    t.index ["user_id"], name: "index_bucketlists_on_user_id", using: :btree
   end
 
   create_table "items", force: :cascade do |t|
     t.string   "name"
-    t.integer  "bucket_list_id"
-    t.boolean  "done",           default: false
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
-    t.index ["bucket_list_id"], name: "index_items_on_bucket_list_id", using: :btree
+    t.integer  "bucketlist_id"
+    t.boolean  "done",          default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.index ["bucketlist_id"], name: "index_items_on_bucketlist_id", using: :btree
   end
 
   create_table "tokens", force: :cascade do |t|
@@ -49,7 +49,7 @@ ActiveRecord::Schema.define(version: 20161028090154) do
     t.datetime "updated_at",      null: false
   end
 
-  add_foreign_key "bucket_lists", "users"
-  add_foreign_key "items", "bucket_lists"
+  add_foreign_key "bucketlists", "users"
+  add_foreign_key "items", "bucketlists"
   add_foreign_key "tokens", "users"
 end

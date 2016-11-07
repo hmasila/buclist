@@ -7,16 +7,16 @@ RSpec.describe BucketList, type: :model do
 
   describe ".search" do
     name = Faker::StarWars.character
-    let!(:bucket_list) { create(:bucket_list, name: name) }
+    let!(:bucketlist) { create(:bucketlist, name: name) }
     context "when query exists" do
       it "returns the bucketlist" do
-        expect(BucketList.search(name)).to include bucket_list
+        expect(BucketList.search(name)).to include bucketlist
       end
     end
   end
 
   describe ".paginate" do
-    let!(:bucket_lists) { create_list(:bucket_list, 50) }
+    let!(:bucketlists) { create_list(:bucketlist, 50) }
     it "returns bucket lists per page" do
       per_page = 20
       page = 1
