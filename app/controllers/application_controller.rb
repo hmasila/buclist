@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-  include Messages
   include JsonResponse
   include BucketlistConcerns
 
@@ -9,13 +8,14 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    result = AuthorizeApiRequest.call(request.headers)
+    result = AuthorizeApiRequest.new(request.headers).authorize
     @token = result[:token]
     @current_user = result[:user]
     if expired_tokens.include? @token
-      raise(ExceptionHandler::ExpiredSignature, Message.expired_token)
+      return json_response(error: Messages.expired_token)
+    else
+      @current_user
     end
-    @current_user
   end
 
   def expired_tokens

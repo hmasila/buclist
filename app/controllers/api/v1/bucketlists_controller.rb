@@ -5,13 +5,13 @@ module API
       before_action :user_bucketlists, only: [:index, :create]
 
       def index
-        @queried_bucketlists = search_and_paginate || paginate_only
-        json_response(@queried_bucketlists)
+        queried_bucketlists = search_and_paginate || paginate_only
+        json_response(queried_bucketlists)
       end
 
       def create
-        @new_bucketlist = @bucketlists.new(list_params).save!
-        json_response(@new_bucketlist, :created)
+        new_bucketlist = @bucketlists.new(list_params).save!
+        json_response(new_bucketlist, :created)
       end
 
       def update
@@ -34,11 +34,10 @@ module API
         params.permit(:name, :user_id)
       end
 
-      def pagination_params
-      end
-
       def search_and_paginate
-        @bucketlists.search(params[:q]).paginate(params[:limit], params[:page]) if params[:q]
+        @bucketlists.
+          search(params[:q]).
+          paginate(params[:limit], params[:page]) if params[:q]
       end
 
       def paginate_only

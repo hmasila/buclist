@@ -2,7 +2,7 @@ module BucketlistConcerns
   private
 
   def set_bucketlist
-    @bucketlist = @current_user.bucketlists.find_by(id: params[:bucketlist_id])
+    @bucketlist = @current_user.bucketlists.find_by(id: params[:id])
   end
 
   def user_bucketlists
@@ -10,10 +10,11 @@ module BucketlistConcerns
   end
 
   def set_bucketlist_item
-    @item = @bucketlist.items.find_by(id: :item_id)
+    bucketlist = @current_user.bucketlists.find_by(id: params[:bucketlist_id])
+    @item = bucketlist.items.find_by(id: params[:id])
   end
 
   def bucketlist_items
-    @items = @bucketlist.items
+    @items = @current_user.bucketlists.find_by(id: params[:bucketlist_id]).items
   end
 end
