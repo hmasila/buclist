@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     if @user.save
       render json: @user
     else
-      render json: { error: "not_created_message" }, status: 400
+      json_response(error: Messages.invalid_credentials, status: 400)
     end
   end
 

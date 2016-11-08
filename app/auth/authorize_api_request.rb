@@ -5,12 +5,11 @@ class AuthorizeApiRequest
     @headers = headers
   end
 
-  def call
-    user
-  end
-
-  def token
-    http_auth_header
+  def authorize
+    {
+      user: user,
+      token: http_auth_header
+    }
   end
 
   private
@@ -19,7 +18,12 @@ class AuthorizeApiRequest
 
   def user
     @user ||= User.find(decoded_auth_token[:user_id]) if decoded_auth_token
-    @user || errors.add(:token, "Invalid token") && nil
+    return @user
+  rescue ActiveRecord::RecordNotFound => e
+    raise(
+      ExceptionHandler::InvalidToken,
+      (Messages.invalid_token + " " + e.message)
+    )
   end
 
   def decoded_auth_token
@@ -29,8 +33,8 @@ class AuthorizeApiRequest
   def http_auth_header
     if headers["Authorization"].present?
       return headers["Authorization"].split(" ").last
-    else errors.add(:token, "Missing token")
+    else
+      raise(ExceptionHandler::MissingToken, Messages.missing_token)
     end
-    nil
   end
 end

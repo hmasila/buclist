@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::API
-  include Messages
   include JsonResponse
   include BucketlistConcerns
 
@@ -9,8 +8,17 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    @current_user = AuthorizeApiRequest.call(request.headers).result
-    @token = AuthorizeApiRequest.new(request.headers).token
-    json_response(error: unauthorized, status: 401) unless @current_user
+    result = AuthorizeApiRequest.new(request.headers).authorize
+    @token = result[:token]
+    @current_user = result[:user]
+    if expired_tokens.include? @token
+      return json_response(error: Messages.expired_token)
+    else
+      @current_user
+    end
+  end
+
+  def expired_tokens
+    @current_user.tokens.pluck(:token)
   end
 end
