@@ -1,17 +1,17 @@
 require "rails_helper"
 
-RSpec.describe "Bucket_list items", type: :request do
+RSpec.describe "bucketlist items", type: :request do
   describe "PUT #update" do
     let(:user) { create(:user) }
-    let!(:bucket) { create(:bucket_list) }
-    let!(:item) { create(:item, bucket_list: bucket) }
+    let!(:bucket) { create(:bucketlist) }
+    let!(:item) { create(:item, bucketlist: bucket) }
     let(:id) { item.id }
     let(:params) { { name: "StarWars" }.to_json }
 
     context "when an authentication token is passed" do
       let(:headers) { valid_headers }
       let!(:req) do
-        put "/bucket_lists/1/items/#{id}", params, valid_headers
+        put "/bucketlists/1/items/#{id}", params, valid_headers
       end
       context "when bucketlist item exists" do
         it_behaves_like "a http response", 200
@@ -30,7 +30,7 @@ RSpec.describe "Bucket_list items", type: :request do
 
     include_context "unauthenticated request" do
       before do
-        get "/bucket_lists/1/items/#{id}", params, invalid_headers
+        get "/bucketlists/1/items/#{id}", params, invalid_headers
       end
     end
   end

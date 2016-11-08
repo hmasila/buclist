@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe "Create a bucket_list", type: :request do
+RSpec.describe "Create a bucketlist", type: :request do
   let(:user) { create(:user) }
-  let(:bucket) { create(:bucket_list) }
-  let(:params) { attributes_for(:bucket_list) }
+  let(:bucket) { create(:bucketlist) }
+  let(:params) { attributes_for(:bucketlist) }
   let(:header) { valid_headers }
 
-  let!(:req) { post "/bucket_lists", params, header }
+  let!(:req) { post "/bucketlists", params, header }
   subject { response }
 
   context "when a bucket has valid attributes" do

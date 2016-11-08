@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::API
   include Messages
   include JsonResponse
-  include BucketListConcerns
+  include BucketlistConcerns
 
   before_action :authenticate_request
   attr_reader :current_user

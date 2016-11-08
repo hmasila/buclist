@@ -1,12 +1,12 @@
 require "rails_helper"
 
-RSpec.describe "Update a bucket_list", type: :request do
+RSpec.describe "Display a bucketlist", type: :request do
   let(:user) { create(:user) }
-  let!(:bucket) { create(:bucket_list, user_id: user.id) }
+  let!(:bucket) { create(:bucketlist, user_id: user.id) }
   let(:id) { bucket.id }
   let(:header) { valid_headers }
 
-  let!(:req) { delete "/bucket_lists/#{id}", {}, header }
+  let!(:req) { get "/bucketlists/#{id}", {}, header }
   subject { response }
 
   context "when the bucket exists" do

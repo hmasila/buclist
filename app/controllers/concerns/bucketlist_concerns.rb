@@ -1,4 +1,4 @@
-module BucketListConcerns
+module BucketlistConcerns
   private
 
   def set_bucketlist

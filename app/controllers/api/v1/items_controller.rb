@@ -28,7 +28,7 @@ class ItemsController < ApplicationController
   private
 
   def list_params
-    params.permit(:name, :bucket_list_id, :done)
+    params.permit(:name, :bucketlist_id, :done)
   end
 
   def paginate_items

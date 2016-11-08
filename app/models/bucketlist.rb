@@ -1,4 +1,4 @@
-class BucketList < ApplicationRecord
+class Bucketlist < ApplicationRecord
   extend Pagination
   belongs_to :user
   has_many :items

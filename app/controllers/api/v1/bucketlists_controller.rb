@@ -1,4 +1,4 @@
-class BucketListsController < ApplicationController
+class BucketlistsController < ApplicationController
   before_action :set_bucketlist, only: [:show, :update, :destroy]
   before_action :user_bucketlists, only: [:index, :create]
 

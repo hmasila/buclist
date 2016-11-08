@@ -1,7 +1,7 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
-  it { should have_many(:bucket_lists) }
+  it { should have_many(:bucketlists) }
   it { should have_many(:tokens) }
 
   it { should validate_presence_of(:firstname) }
