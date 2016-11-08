@@ -9,8 +9,16 @@ class ApplicationController < ActionController::API
   private
 
   def authenticate_request
-    @current_user = AuthorizeApiRequest.call(request.headers).result
-    @token = AuthorizeApiRequest.new(request.headers).token
-    json_response(error: unauthorized, status: 401) unless @current_user
+    result = AuthorizeApiRequest.call(request.headers)
+    @token = result[:token]
+    @current_user = result[:user]
+    if expired_tokens.include? @token
+      raise(ExceptionHandler::ExpiredSignature, Message.expired_token)
+    end
+    @current_user
+  end
+
+  def expired_tokens
+    @current_user.tokens.pluck(:token)
   end
 end
