@@ -5,5 +5,9 @@ class Bucketlist < ApplicationRecord
 
   validates :name, presence: true
 
-  scope :search, -> (name) { where("name ILIKE ?", "%#{name}%") }
+  scope(:search, lambda do |name|
+    bucketlists = where("name ILIKE ?", "%#{name}%")
+    return Messages.not_found(name) if bucketlists.blank?
+    bucketlists
+  end)
 end

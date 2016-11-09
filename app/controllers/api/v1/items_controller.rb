@@ -34,7 +34,7 @@ module API
       end
 
       def paginate_items
-        @items.paginate(params[:limit], params[:page])
+        @items.paginate(params[:limit], params[:page]) if @items
       end
     end
   end

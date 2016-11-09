@@ -13,6 +13,14 @@ RSpec.describe Bucketlist, type: :model do
         expect(Bucketlist.search(name)).to include bucketlist
       end
     end
+
+    context "when query does not exist" do
+      it "returns not found error" do
+        name = Faker::Lorem.word
+        expect(Bucketlist.search(name)).
+          to eql("Sorry, #{name} not found.")
+      end
+    end
   end
 
   describe ".paginate" do

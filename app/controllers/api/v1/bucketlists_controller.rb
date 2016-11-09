@@ -37,11 +37,11 @@ module API
       def search_and_paginate
         @bucketlists.
           search(params[:q]).
-          paginate(params[:limit], params[:page]) if params[:q]
+          paginate(params[:limit], params[:page]) if params[:q] && @bucketlist
       end
 
       def paginate_only
-        @bucketlists.paginate(params[:limit], params[:page])
+        @bucketlists.paginate(params[:limit], params[:page]) if @bucketlists
       end
     end
   end
