@@ -5,20 +5,20 @@ RSpec.describe UsersController, type: :controller do
   let(:params) { attributes_for(:user) }
   let!(:existing_user) { create(:user) }
 
-  describe "POST #create" do
+  describe "POST#create" do
     context "when a new user signs up" do
       let!(:req) { post :create, params: params }
 
       it_behaves_like "a http response", 201, "Account created successfully"
 
+      it "returns an authentication token" do
+        expect(json["auth_token"]).not_to be_nil
+      end
+
       it "creates a new user" do
         expect do
           response
         end.to change(User, :count).by(1)
-      end
-
-      it "returns an authentication token" do
-        expect(json["auth_token"]).not_to be_nil
       end
     end
 

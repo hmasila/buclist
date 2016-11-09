@@ -14,6 +14,10 @@ RSpec.describe "User logs in", type: :request do
 
     context "when a user logs in" do
       it_behaves_like "a http response", 201, "Logged in successfully"
+
+      it "returns an authentication token" do
+        expect(json["auth_token"]).not_to be_nil
+      end
     end
 
     context "when a user logs in with invalid parameters" do
