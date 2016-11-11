@@ -1,42 +1,34 @@
 require "rails_helper"
 
 RSpec.describe UsersController, type: :controller do
-  let(:user) { build(:user) }
-  let(:params) { attributes_for(:user) }
-  let!(:existing_user) { create(:user) }
-
   describe "POST#create" do
-    context "when a new user signs up" do
-      let!(:req) { post :create, params: params }
+    let(:attrs) { attributes_for(:user) }
+    let!(:req) { post :create, params: attrs }
+    let!(:existing_user) { create(:user) }
+    subject { response }
 
+    context "when a new user signs up" do
       it_behaves_like "a http response", 201, "Account created successfully"
 
       it "returns an authentication token" do
-        binding.pry
         expect(json["auth_token"]).not_to be_nil
       end
     end
 
     context "when and existing user signs up" do
-      let(:params) do
+      let(:attrs) do
         {
+          firstname: Faker::Name.first_name,
+          lastname: Faker::Name.last_name,
           email: existing_user.email,
           password: existing_user.password
         }
       end
-      let!(:req) { post :create, params: params }
-
-      it_behaves_like "a http response", 422, "User already exists"
+      it_behaves_like "a http response", 422, "Account could not be created"
     end
 
     context "when a new user signs up with the invalid parameters" do
-      let(:params) do
-        {
-          email: Faker::Lorem.word,
-          password: nil
-        }
-      end
-      let!(:req) { post :create, params: params }
+      let(:attrs) { {} }
 
       it_behaves_like "a http response", 422, "Account could not be created"
     end

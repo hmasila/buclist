@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       response = { message: Messages.signup_successful, auth_token: auth_token }
       json_response(response, :created)
     else
-      json_response(error: Messages.signup_failed, status: 422)
+      json_response({ message: Messages.signup_failed }, :unprocessable_entity)
     end
   end
 

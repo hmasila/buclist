@@ -1,7 +1,5 @@
 RSpec.shared_context "unauthenticated request" do
   context "when user does not have a valid token" do
-    it "returns an authorization error response" do
-      expect(response.status).to be(401)
-    end
+    it_behaves_like "a http response", 401, "Invalid Token"
   end
 end

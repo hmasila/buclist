@@ -12,7 +12,7 @@ module HelperSpecs
   end
 
   def valid_headers(user_id)
-    headers["Authorization"] = token(user_id)
+    headers.merge("Authorization" => token(user_id))
   end
 
   def headers

@@ -34,7 +34,7 @@ class AuthorizeApiRequest
     if headers["Authorization"].present?
       return headers["Authorization"].split(" ").last
     else
-      raise(ExceptionHandler::MissingToken, Messages.missing_token)
+      raise(ExceptionHandler::MissingToken, Messages.invalid_token)
     end
   end
 end
