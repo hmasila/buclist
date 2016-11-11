@@ -12,13 +12,8 @@ RSpec.describe UsersController, type: :controller do
       it_behaves_like "a http response", 201, "Account created successfully"
 
       it "returns an authentication token" do
+        binding.pry
         expect(json["auth_token"]).not_to be_nil
-      end
-
-      it "creates a new user" do
-        expect do
-          response
-        end.to change(User, :count).by(1)
       end
     end
 

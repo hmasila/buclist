@@ -6,7 +6,7 @@ RSpec.describe "Create an item", type: :request do
     let(:bucket) { create(:bucketlist) }
     let(:bucket_id) { 1 }
     let(:params) { { name: "StarWars", bucketlist: bucket }.to_json }
-    let(:headers) { valid_headers }
+    let(:headers) { valid_headers(user.id) }
 
     context "when user has provided the authorization code" do
       let!(:req) do

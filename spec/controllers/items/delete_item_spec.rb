@@ -6,7 +6,7 @@ RSpec.describe "Delete an item", type: :request do
     let!(:bucket) { create(:bucketlist) }
     let!(:item) { create(:item, bucketlist: bucket) }
     let(:id) { item.id }
-    let(:headers) { valid_headers }
+    let(:headers) { valid_headers(user.id) }
 
     context "when an authentication token is passed" do
       let!(:req) do

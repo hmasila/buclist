@@ -38,11 +38,25 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.include FactoryGirl::Syntax::Methods
 
-  config.before(:suite) { DatabaseCleaner.clean_with :truncation }
-  config.before(:each) { DatabaseCleaner.strategy = :transaction }
-  config.before(:each, type: :feature) { DatabaseCleaner.strategy = :truncation }
-  config.before(:each) { DatabaseCleaner.start }
-  config.append_after(:each) { DatabaseCleaner.clean }
+  config.before(:suite) do
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.strategy = :transaction
+  end
+
+  config.before(:each, js: true) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
 
   Shoulda::Matchers.configure do |c|
     c.integrate do |with|
