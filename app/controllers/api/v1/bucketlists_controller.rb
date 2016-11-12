@@ -10,13 +10,14 @@ module API
       end
 
       def create
-        new_bucketlist = @bucketlists.new(list_params).save!
+        new_bucketlist = @bucketlists.new(list_params)
+        new_bucketlist.save!
         json_response(new_bucketlist, :created)
       end
 
       def update
         @bucketlist.update!(list_params)
-        head :no_content
+        json_response(@bucketlist)
       end
 
       def show
@@ -25,7 +26,7 @@ module API
 
       def destroy
         @bucketlist.destroy
-        head :no_content
+        json_response(message: Messages.deleted("bucketlist"))
       end
 
       private

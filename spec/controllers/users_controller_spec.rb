@@ -25,6 +25,10 @@ RSpec.describe UsersController, type: :controller do
         }
       end
       it_behaves_like "a http response", 422, "Account could not be created"
+
+      it "changes the User model count by 1" do
+        expect(User.count).to eq 1
+      end
     end
 
     context "when a new user signs up with the invalid parameters" do

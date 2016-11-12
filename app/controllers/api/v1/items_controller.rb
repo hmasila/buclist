@@ -9,13 +9,14 @@ module API
       end
 
       def create
-        new_item = @items.new(list_params).save!
+        new_item = @items.new(list_params)
+        new_item.save!
         json_response(new_item, :created)
       end
 
       def update
         @item.update!(list_params)
-        head :no_content
+        json_response(@item)
       end
 
       def show
@@ -24,7 +25,7 @@ module API
 
       def destroy
         @item.destroy
-        head :no_content
+        json_response(message: Messages.deleted("item"))
       end
 
       private

@@ -2,37 +2,39 @@ require "rails_helper"
 
 RSpec.describe "bucketlist items", type: :request do
   describe "GET #index" do
-    let(:user) { create(:user) }
-    let(:bucket) { create(:bucketlist) }
-    let!(:items) { create_list(:item, 10, bucketlist: bucket) }
-    let(:bucket_id) { 1 }
-    let(:headers) { valid_headers(user.id) }
+    let!(:user) { create(:user, id: 1) }
+    let!(:bucket) { create(:bucketlist, id: 1) }
+    let!(:items) { create_list(:item, 150) }
+    let(:header) { valid_headers(user.id) }
+    let(:params) {}
 
-    context "when authentication token is passed" do
-      let!(:req) { get "/bucketlists/#{bucket_id}/items", {}, headers }
-      context "when user's bucketlist has items" do
-        it_behaves_like "a http response", 200
-        it "retrieves all items for bucket list" do
-          expect(json.count).to eq(10)
-          expect(json[0][:name]).to eq(item[0].name)
-        end
-      end
-      context "when bucketlist has no items" do
-        it "returns an empty json" do
-          Item.destroy_all
-          expect(json.count).to eq(0)
-        end
-      end
+    let!(:req) { get "/bucketlists/1/items", params: params, headers: header }
+    context "without pagination params" do
+      it_behaves_like("pagination without params", Item)
+    end
 
-      context "when bucketlist does not exist" do
-        let(:bucket_id) { 0 }
-        it_behaves_like("route not found")
+    context "with invalid pagination params" do
+      it_behaves_like("pagination with invalid params", Item)
+    end
+
+    context "with pagination params and limit <= 100" do
+      it_behaves_like("pagination with limit <= 100", Item)
+    end
+
+    context "with pagination params and limit > 100" do
+      it_behaves_like("pagination with limit > 100", Item)
+    end
+
+    context "when the user doesn't have any bucketlists" do
+      before do
+        Item.destroy_all
+        get "/bucketlists/1/items", params: params, headers: header
+      end
+      it "returns an empty json" do
+        expect(json.count).to eq(0)
       end
     end
 
-    include_context "unauthenticated request" do
-      let(:headers) { headers }
-      before { get "/bucketlists/#{bucket_id}/items", {}, headers }
-    end
+    include_context "unauthenticated request"
   end
 end

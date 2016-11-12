@@ -43,5 +43,9 @@ class Messages
     def expired_token
       "Token has expired. Please login to continue."
     end
+
+    def deleted(resource)
+      "#{resource} deleted successfully"
+    end
   end
 end
