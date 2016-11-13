@@ -1,6 +1,28 @@
 engines:
-  # ... CONFIG CONTENT ...
+  rubocop:
+    enabled: true
+    #checks:
+    #	Rubocop/Metrics/ClassLength:
+    #  	enabled: false
+  golint:
+   	enabled: true
+  eslint:
+    enabled: true
   csslint:
-    # ... CONFIG CONTENT ...
     enabled: false
-# ... CONFIG CONTENT ...
+  duplication:
+  	enabled: true
+    config:
+    	languages:
+      - ruby
+      	#mass_threshold: 30
+      - javascript
+ratings:
+  paths:
+  - app/**
+  - lib/**
+  - "**.rb"
+  - "**.go"
+exclude_paths:
+- spec/**/*
+- "**/public/**/*"
