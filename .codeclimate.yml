@@ -1,6 +1,10 @@
+languages:
+  Ruby: true
+  JavaScript: true
+  PHP: false
 engines:
-  # ... CONFIG CONTENT ...
   csslint:
-    # ... CONFIG CONTENT ...
-    enabled: false
-# ... CONFIG CONTENT ...
+    enabled: true
+exclude_paths:
+- "spec/**/*"
+- "public/**/*"
