@@ -1,8 +1,12 @@
-JavaScript: true
-Ruby: true
-Python: false
-PHP: false
-
+languages:
+  Ruby: true
+  JavaScript: true
+  PHP: false
+engines:
+  markdownlint:
+    enabled: true
+  csslint:
+    enabled: true
 exclude_paths:
-- spec/**/*
-- public/**/*
+- "spec/**/*"
+- "public/**/*"
