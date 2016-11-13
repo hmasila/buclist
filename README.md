@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/andela-hmasila/buclist.svg?branch=develop)](https://travis-ci.org/andela-hmasila/buclist)
+[![Coverage Status](https://coveralls.io/repos/github/andela-hmasila/buclist/badge.svg?branch=ch-update-readme-133965431)](https://coveralls.io/github/andela-hmasila/buclist?branch=develop)
 # Buclist 🏄
 
 Buclist is a simple bucketlist API allows consumers to perform CRUD operations on bucketlists.
