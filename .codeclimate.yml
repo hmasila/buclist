@@ -3,8 +3,6 @@ languages:
   JavaScript: true
   PHP: false
 engines:
-  markdownlint:
-    enabled: true
   csslint:
     enabled: true
 exclude_paths:
