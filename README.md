@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/andela-hmasila/buclist.svg?branch=develop)](https://travis-ci.org/andela-hmasila/buclist)
 # Buclist 🏄
 
 Buclist is a simple bucketlist API allows consumers to perform CRUD operations on bucketlists.
@@ -46,10 +47,17 @@ Source code - github.com/andela-hmasila/buclist.
 
 ## API Endpoints
 
-All endpoints except `/signup` and `/auth/login` require a token for authentication. The API call should have the token in Authorization header.
+All endpoints except `/signup` and `/auth/login` require a token for `Authorization`, failure to which the API will return the error.
 
-    http http://bucki-t.herokuapp.com/bucketlists \
-    Authorization: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0Njc2MTkxNDV9.R6VLZD4qtsdVHXZwU8bEo6S16cbNQfo7lICsNdAq00I"
+    {
+        "message": "Missing token"
+    }
+
+An `Authorization` token looks like this
+
+      {
+        auth_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJleHAiOjE0Njc2MTkxNDV9.R6VLZD4qtsdVHXZwU8bEo6S16cbNQfo7lICsNdAq00I"
+    }
 
 | EndPoint                                |   Functionality                      |
 | --------------------------------------- | ------------------------------------:|
@@ -68,10 +76,6 @@ All endpoints except `/signup` and `/auth/login` require a token for authenticat
 | DELETE /bucketlists/:id/items/:item_id  | Delete an item in a bucket lists     |
 
 
-
-## Versions
-
-The API uses Accept header to version api calls e.g. `Accept:application/vnd.buclist.v1+json`.
 
 ## Request & Response examples
 
@@ -117,7 +121,7 @@ Response (application/json)
         }
     ]
 
-## Application Limitations
+## Limitations
 
   1. The API only responds with JSON
 
