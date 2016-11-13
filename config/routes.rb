@@ -4,10 +4,6 @@ Rails.application.routes.draw do
       resources :bucketlists, except: [:new, :edit] do
         resources :items, except: [:new, :edit]
       end
-      # with_options except: [:new, :edit] do |list_only|
-      #   list_only.resources :bucketlists do
-      #     list_only.resources :items
-      #   end
     end
   end
 

@@ -29,6 +29,6 @@ module ExceptionHandler
   end
 
   def access_denied(e)
-    json_response({ errors: e.message }, :unauthorized)
+    json_response({ message: e.message }, :unauthorized)
   end
 end

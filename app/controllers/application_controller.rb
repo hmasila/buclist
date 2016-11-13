@@ -13,7 +13,10 @@ class ApplicationController < ActionController::API
     @token = result[:token]
     @current_user = result[:user]
     if expired_tokens.include? @token
-      return json_response(error: Messages.expired_token)
+      return json_response(
+        { message: Messages.expired_token },
+        :unauthorized
+      )
     else
       @current_user
     end

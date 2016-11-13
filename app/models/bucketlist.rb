@@ -7,7 +7,9 @@ class Bucketlist < ApplicationRecord
 
   scope(:search, lambda do |name|
     bucketlists = where("name ILIKE ?", "%#{name}%")
-    return Messages.not_found(name).to_json if bucketlists.blank?
+    raise(
+      ActiveRecord::RecordNotFound, Messages.not_found(name)
+    ) if bucketlists.blank?
     bucketlists
   end)
 end
