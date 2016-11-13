@@ -4,9 +4,7 @@ RSpec.describe Bucketlist, type: :model do
   it { is_expected.to belong_to :user }
   it { is_expected.to have_many :items }
   it { is_expected.to validate_presence_of :name }
-  before do
-    create(:user, id: 1)
-  end
+  let!(:user) { create(:user, id: 1) }
 
   describe ".search" do
     name = Faker::StarWars.character

@@ -3,11 +3,8 @@ require "rails_helper"
 RSpec.describe Item, type: :model do
   it { is_expected.to belong_to(:bucketlist) }
   it { is_expected.to validate_presence_of(:name) }
-
-  before do
-    create(:user, id: 1)
-    create(:bucketlist, id: 1)
-  end
+  let!(:user) { create(:user, id: 1) }
+  let!(:bucket) { create(:bucketlist, id: 1) }
 
   describe ".paginate" do
     let!(:items) { create_list(:item, 50) }
