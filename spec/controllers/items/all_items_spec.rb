@@ -6,7 +6,7 @@ RSpec.describe "bucketlist items", type: :request do
     let(:bucket) { create(:bucketlist) }
     let!(:items) { create_list(:item, 10, bucketlist: bucket) }
     let(:bucket_id) { 1 }
-    let(:headers) { valid_headers }
+    let(:headers) { valid_headers(user.id) }
 
     context "when authentication token is passed" do
       let!(:req) { get "/bucketlists/#{bucket_id}/items", {}, headers }

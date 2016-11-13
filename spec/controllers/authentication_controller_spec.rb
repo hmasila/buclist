@@ -1,6 +1,6 @@
 require "rails_helper"
 
-RSpec.describe "User logs in", type: :request do
+RSpec.describe AuthenticationController, type: :controller do
   let(:user) { create(:user) }
   let(:headers) { valid_headers }
   let(:params) do
@@ -9,8 +9,8 @@ RSpec.describe "User logs in", type: :request do
       password: user.password
     }
   end
-  describe "POST /auth/login" do
-    let!(:req) { post "/auth/login", params: params, headers: headers }
+  describe "POST #login" do
+    let!(:req) { post "/auth/login", params: params }
 
     context "when a user logs in" do
       it_behaves_like "a http response", 201, "Logged in successfully"

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
   include JsonResponse
   include BucketlistConcerns
+  include ExceptionHandler
 
   before_action :authenticate_request
   attr_reader :current_user

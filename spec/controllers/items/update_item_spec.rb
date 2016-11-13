@@ -9,7 +9,7 @@ RSpec.describe "bucketlist items", type: :request do
     let(:params) { { name: "StarWars" }.to_json }
 
     context "when an authentication token is passed" do
-      let(:headers) { valid_headers }
+      let(:headers) { valid_headers(user.id) }
       let!(:req) do
         put "/bucketlists/1/items/#{id}", params, valid_headers
       end

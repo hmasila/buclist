@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "List all bucketlists", type: :request do
   let(:user) { create(:user) }
   let!(:bucket) { create_list(:bucketlist, 25, user_id: user.id) }
-  let(:header) { valid_headers }
+  let(:header) { valid_headers(user.id) }
 
   let!(:req) { get "/bucketlists", {}, header }
   subject { response }

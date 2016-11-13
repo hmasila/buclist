@@ -5,7 +5,7 @@ module API
       before_action :user_bucketlists, only: [:index, :create]
 
       def index
-        queried_bucketlists = search_and_paginate || paginate_only
+        queried_bucketlists = search || paginate_only
         json_response(queried_bucketlists)
       end
 
@@ -34,14 +34,12 @@ module API
         params.permit(:name, :user_id)
       end
 
-      def search_and_paginate
-        @bucketlists.
-          search(params[:q]).
-          paginate(params[:limit], params[:page]) if params[:q]
+      def search
+        @bucketlists.search(params[:q]) if params[:q] && @bucketlists
       end
 
       def paginate_only
-        @bucketlists.paginate(params[:limit], params[:page])
+        @bucketlists.paginate(params[:limit], params[:page]) if @bucketlists
       end
     end
   end

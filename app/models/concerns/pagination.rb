@@ -21,7 +21,7 @@ module Pagination
 
   def get_offset(limit, page)
     offset = if page >= 1
-               ((page - 1) * limit + 1)
+               ((page - 1) * limit)
              else
                0
              end

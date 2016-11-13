@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :bucketlist do
     name { Faker::Lorem.word }
-    user
+    user_id 1
   end
 end
