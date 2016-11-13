@@ -5,15 +5,15 @@ engines:
     #	Rubocop/Metrics/ClassLength:
     #  	enabled: false
   golint:
-   	enabled: true
+    enabled: true
   eslint:
     enabled: true
   csslint:
     enabled: false
   duplication:
-  	enabled: true
-    config:
-    	languages:
+   enabled: true
+  config:
+  languages:
       - ruby
       	#mass_threshold: 30
       - javascript
