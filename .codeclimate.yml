@@ -14,11 +14,11 @@ engines:
     enabled: false
   duplication:
     enabled: true
-    config:
-      languages:
-      - ruby
-      	#mass_threshold: 30
-      - javascript
+  config:
+    languages:
+    - ruby
+    #mass_threshold: 30
+    - javascript
 ratings:
   paths:
   - app/**
