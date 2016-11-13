@@ -1,0 +1,408 @@
+FORMAT: 1A
+HOST: https://bucki-t.herokuapp.com
+
+# Buckit
+
+Do you keep a bucket list? Bucketit is a simple API, that can be used to store your bucket lists or the things you want to do before you die. It allows consumers to perform CRUD operations
+on bucketlists.
+You can use the same API to even manage a ToDo application
+A bucketlist has many items and belongs to a user.
+
+API V1 https://github.com/andela-hmasila/buckit
+
+
+# Documentation guidelines
+
+This is a RESTful API. Thus, all operations on resources will be described by their corresponding
+Http verb.
+
+In order to access the API resources, authentication is required. All requests except ``` /auth/signin ``` and ``` \signup ```require
+an authentication token passed in the ``` Authorization ``` header.
+
+# Group User
+
+Resources related to users in the API
+
+
+### Create A New User [POST /signup]
+
+This endpoint serves to signup new users. A user creates an account by making
+a post request to ``` /signup ```. No authentication is required.
+
+You must fill the following credentials to sign up:
+
++ User’s first name.
++ User’s last name.
++ User’s email.
++ A User password.
+
++ Request (application/json)
+
+        {
+            "firstname": "John",
+            "lastname": "Doe",
+            "email": "johndoe@hogwarts.com",
+            "password": "harry_potter"
+        }
+
++ Response 201 (application/json)
+
+  + Body
+
+            {
+                "message": "Account created successfully"
+                "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE0NjI5ODIyOTh9.pFyQmqKmca9GeU9hxzbvl0LCzpp13N9Ei2nzdGFrlUs"
+            }
+
+### Login A User [POST /auth/login]
+
+This endpoint serves to login existing users. It expects ```email``` and ``` password ```
+for authentication and returns a token that expires 24 hours from the time it's created.
+
+
++ Request (application/json)
+
+        {
+            "email": "johndoe@hogwarts.com",
+            "password": "harry_potter"
+        }
+
++ Response 200 (application/json)
+
+        {
+              "auth_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoyLCJleHAiOjE0NjI5ODIyOTh9.pFyQmqKmca9GeU9hxzbvl0LCzpp13N9Ei2nzdGFrlUs"
+        }
+
+
+### User Logout [GET /auth/logout]
+
+This endpoint logs out a user. Once a user is logged out, that token is invalidated.
+
++ Response 200 (application/json)
+
+        {
+            "message": "Logged out successfully"
+        }
+
+
+# Group Bucketlists
+
+Resources related to buckelists in the API
+
+## Bucketlist Collection [/bucketlists]
+
+This endpoint serves all bucketlists belonging to a particular user.
+The endpoint supports pagination, by default the pagination has a minimum default value of ```20``` and a maximum of ```100``` bucketlists.
+
+### List All Bucketlists [GET]
+
++ Response 200 (application/json)
+
+        [
+          {
+              "id": 1,
+              "name": "Resurrect from The Empire Strikes",
+              "items": [
+                  {
+                    "id": 9,
+                    "name": "shoot Greedo",
+                    "date_created": "2016-11-13  3:15:16",
+                    "date_modified": "2016-11-13  3:15:16",
+                    "done": false
+                  }
+              ],
+              "date_created": "2016-11-13  3:13:50",
+              "date_modified": "2016-11-13  3:13:50",
+              "created_by": "Han Solo"
+            },
+            {
+                "id": 2,
+                "name": "Find R2-D2",
+                "items": [
+                    {
+                      "id": 9,
+                      "name": "Talk to C3PO",
+                      "date_created": "2016-11-13  3:15:16",
+                      "date_modified": "2016-11-13  3:15:16",
+                      "done": false
+                    }
+                ],
+                "date_created": "2016-11-13  3:13:50",
+                "date_modified": "2016-11-13  3:13:50",
+                "created_by": "Luke Skywalker"
+            }
+        ]
+
+
+### List Paginated Bucketlists [GET /bucketlists?page=2&limit=2]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 3,
+                "name": "Eradicate the Jedi Order",
+                "items": [
+                    {
+                      "id": 19,
+                      "name": "become a Sith Lord",
+                      "date_created": "2016-11-23  3:25:16",
+                      "date_modified": "2016-11-23  3:25:16",
+                      "done": false
+                    }
+                ],
+                "date_created": "2016-11-23  3:23:50",
+                "date_modified": "2016-11-23  3:23:50",
+                "created_by": "Darth Veder"
+              },
+              {
+                  "id": 4,
+                  "name": "Travel to Starwars universe",
+                  "items": [
+                      {
+                        "id": 17,
+                        "name": "Talk to my maid",
+                        "date_created": "2016-11-23  3:25:16",
+                        "date_modified": "2016-11-23  3:25:16",
+                        "done": false
+                      }
+                  ],
+                  "date_created": "2016-11-23  3:23:50",
+                  "date_modified": "2016-11-23  3:23:50",
+                  "created_by": "Princess Leia"
+              }
+        ]
+
+### Search Bucketlist [GET /bucketlists?q=fight]
+
++ Response 200
+
+            [
+                {
+
+                    "name": "fight Luke Skywalker",
+                    "id": 13,
+                    "items": [
+                        {
+                            "id": 3,
+                            "name": "Kill all Jedis",
+                            "date_created": "2016-11-04  8:12:05",
+                            "date_modified": "2016-11-04  8:12:05",
+                            "done": false
+                        }
+                    ],
+                    "created_by": "Darth Vader"
+                },
+                {
+                    "name": "fight the Darth Vader",
+                    "id": 5,
+                    "items": [
+                        {
+                            "id": 4,
+                            "name": "Talk to R2-D2",
+                            "date_created": "2016-11-04  8:12:05",
+                            "date_modified": "2016-11-04  8:12:05",
+                            "done": false
+                        }
+                    ],
+                    "created_by": "Luke Skywalker"
+                }
+            ]
+
+
+### Search bucketlist with pagination [GET /bucketlists?q=chew&page=1&limit=1]
+
++ Request
+
+        + q - name of Bucketlist we are searching for
+        + page - The page of the records to return
+        + limit - The limit of the records per page
+
++ Response 200
+
+            [
+              {
+
+                  "name": "fight Luke Skywalker",
+                  "id": 13,
+                  "items": [
+                      {
+                          "id": 3,
+                          "name": "Kill all Jedis",
+                          "date_created": "2016-11-04  8:12:05",
+                          "date_modified": "2016-11-04  8:12:05",
+                          "done": false
+                      }
+                  ],
+                  "created_by": "Darth Vader"
+              }
+            ]
+
+
+## Bucketlist [/bucketlists/{id}]
+
++ Parameters
+    + id (number) - ID of the bucketlist in the form of an integer
+
+### Create A New Bucketlist [POST /bucketlists]
+
++ Request (application/json)
+
+        {
+            "name": "Empire’s eradication"
+        }
+
++ Response 201 (application/json)
+
+
+              {
+                "name": "Empire’s eradication"
+                "id": 15,
+                "items": [],
+                "date_created": "2016-11-04  8:12:05",
+                "date_modified": "2016-11-04  8:12:05",
+                "created_by": "Darth Vader"
+              }
+
+### Show a Bucketlist [GET /bucketlists/15]
+
++ Response 200 (application/json)
+
+        {
+            "id": 15,
+            "name": "Empire’s eradication",
+            "items": [
+                {
+                    "id": 4,
+                    "name": " become a Sith Lord",
+                    "date_created": "2016-11-04  8:12:05",
+                    "date_modified": "2016-11-04  8:12:05",
+                    "done": false
+                }
+            ],
+            "created_by": "Darth Vader"
+        }
+
+### Update a Bucketlist [PUT /bucketlists/15]
+
++ Request (application/json)
+
+        {
+            "name": "Jabba the hut"
+        }
+
++ Response 200
+
+        {
+            "id": 15,
+            "name": "Jabba the hut",
+            "items": [
+                {
+                    "id": 4,
+                    "name": " become a Sith Lord",
+                    "date_created": "2016-11-04  8:12:05",
+                    "date_modified": "2016-11-04  8:22:05",
+                    "done": false
+                }
+            ],
+            "created_by": "Darth Vader"
+        }
+
+### Delete a bucketlist [DELETE /bucketlist/15]
+
++ Response 200 (application/json)
+
+        {
+            "message": "Bucketlist deleted successfully"
+        }
+
+# Group Item
+
+## Items Collection [/bucketlists/1/items/]
+
+This endpoint serves all bucketlist items belonging to a particular bucketlist.
+User can perform CRUD operations on this bucketlist items resource.
+
+### Get All Bucketlist Items [GET /bucketlist/3/items]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id": 4,
+                "name": "become a Sith Lord",
+                "date_created": "2016-11-04  8:12:05",
+                "date_modified": "2016-11-04  8:12:05",
+                "done": false
+            },
+            {
+                "id": 5,
+                "name": "serve Sidious",
+                "date_created": "2016-11-14  8:12:05",
+                "date_modified": "2016-11-14  8:12:05",
+                "done": false
+            }
+        ]
+
+### Create A New Bucketlist Item [POST /bucketlists/15/items]
+
++ Request (application/json)
+
+        {
+            "name": "plan to bring my father back"
+        }
+
++ Response 201 (application/json)
+
+  + Body
+
+            [
+              {
+                      "id": 4,
+                      "name": "plan to bring my father back",
+                      "date_created": "2016-11-04  8:12:05",
+                      "date_modified": "2016-11-04  8:12:05",
+                      "done": false
+              }
+            ]
+
+
+## Bucketlist Item [/bucketlists/15/items/{id}]
+
+### View a Bucketlist Item [GET /bucketlists/15/items/4]
+
++ Response 200 (application/json)
+
+        {
+                "id": 4,
+                "name": "plan to bring my father back",
+                "date_created": "2016-11-04  8:12:05",
+                "date_modified": "2016-11-04  8:12:05",
+                "done": false
+        }
+
+### Update an Item [PUT /bucketlists/15/items/4]
+
++ Request (application/json)
+
+        {
+            "done": true
+        }
+
++ Response 200 (application/json)
+
+        {
+                "id": 4,
+                "name": "plan to bring my father back",
+                "date_created": "2016-11-04  8:12:05",
+                "date_modified": "2016-11-04  8:12:05",
+                "done": true
+        }
+
+### Delete an item [DELETE /bucketlists/15/items/4]
+
++ Response 200 (application/json)
+
+        {
+            "message": "Item deleted successfully"
+        }
