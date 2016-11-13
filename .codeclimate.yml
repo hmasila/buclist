@@ -4,16 +4,18 @@ engines:
     #checks:
     #	Rubocop/Metrics/ClassLength:
     #  	enabled: false
-  golint:
+  brakeman:
     enabled: true
+    #exclude_fingerprints:
+    #- 08c185b3f764f262539a1f76997d3a89
   eslint:
     enabled: true
   csslint:
     enabled: false
   duplication:
-   enabled: true
-  config:
-  languages:
+    enabled: true
+    config:
+      languages:
       - ruby
       	#mass_threshold: 30
       - javascript
@@ -25,4 +27,4 @@ ratings:
   - "**.go"
 exclude_paths:
 - spec/**/*
-- "**/public/**/*"
+- "public/**/*"
