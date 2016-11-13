@@ -280,7 +280,7 @@
 }
 
 body {
-    color: #c8c8c8;
+    color: #fff;
     background: #00838F;
     font: 400 14px / 1.42 Helvetica, sans-serif
 }
@@ -295,7 +295,7 @@ h2,
 h3,
 h4,
 h5 {
-    color: #c8c8c8;
+    color: #fff;
     margin: 12px 0
 }
 
@@ -543,7 +543,7 @@ nav .resource-group .heading .chevron {
 
 nav .resource-group .heading a {
     display: block;
-    color: #c8c8c8;
+    color: #fff;
     opacity: .7;
     border-left: 2px solid transparent;
     margin: 0
@@ -552,7 +552,7 @@ nav .resource-group .heading a {
 nav .resource-group .heading a:hover {
     text-decoration: none;
     background-color: bad-color;
-    border-left: 2px solid #c8c8c8
+    border-left: 2px solid #fff
 }
 
 nav ul {
@@ -575,7 +575,7 @@ nav ul a {
 nav ul a:hover {
     text-decoration: none;
     background-color: bad-color;
-    border-left: 2px solid #c8c8c8
+    border-left: 2px solid #fff
 }
 
 nav ul>li {
@@ -970,7 +970,7 @@ nav {
 .resource-group .heading a {
     padding: 12px;
     margin: -12px -12px 12px -12px;
-    background-color: #373d44;
+    background-color: #006064;
     border-bottom: 1px solid #202020;
     border-top-left-radius: 6px;
     border-top-right-radius: 6px;
