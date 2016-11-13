@@ -1,6 +1,7 @@
 [![Build Status](https://travis-ci.org/andela-hmasila/buclist.svg?branch=develop)](https://travis-ci.org/andela-hmasila/buclist)
 [![Coverage Status](https://coveralls.io/repos/github/andela-hmasila/buclist/badge.svg?branch=ch-update-readme-133965431)](https://coveralls.io/github/andela-hmasila/buclist?branch=develop)
 [![Code Climate](https://codeclimate.com/github/andela-hmasila/buclist/badges/gpa.svg)](https://codeclimate.com/github/andela-hmasila/buclist)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/dff50f8f69854013bd18186bacffe046)](https://www.codacy.com/app/hannah-masila/buclist?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=andela-hmasila/buclist&amp;utm_campaign=Badge_Grade)
 # Buclist 🏄
 
 Buclist is a simple bucketlist API allows consumers to perform CRUD operations on bucketlists.
