@@ -9,22 +9,20 @@ module Pagination
   private
 
   def get_limit(limit)
-    limit = if limit <= 0
-              DEFAULT_LIMIT
-            elsif limit > MAX_LIMIT
-              MAX_LIMIT
-            else
-              limit
-            end
-    limit
+    if limit <= 0
+      DEFAULT_LIMIT
+    elsif limit > MAX_LIMIT
+      MAX_LIMIT
+    else
+      limit
+    end
   end
 
   def get_offset(limit, page)
-    offset = if page >= 1
-               ((page - 1) * limit)
-             else
-               0
-             end
-    offset
+    if page >= 1
+      ((page - 1) * limit)
+    else
+      0
+    end
   end
 end
