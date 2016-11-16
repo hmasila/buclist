@@ -3,24 +3,26 @@ module Pagination
   DEFAULT_LIMIT = 20
 
   def paginate(limit, page)
-    limit(get_limit(limit.to_i)).offset(get_offset(limit.to_i, page.to_i))
+    @limit = limit.to_i
+    @page = page.to_i
+    limit(get_limit).offset(get_offset)
   end
 
   private
 
-  def get_limit(limit)
-    if limit <= 0
+  def get_limit
+    if @limit <= 0
       DEFAULT_LIMIT
-    elsif limit > MAX_LIMIT
+    elsif @limit > MAX_LIMIT
       MAX_LIMIT
     else
-      limit
+      @limit
     end
   end
 
-  def get_offset(limit, page)
-    if page >= 1
-      ((page - 1) * limit)
+  def get_offset
+    if @page >= 1
+      ((@page - 1) * @limit)
     else
       0
     end
