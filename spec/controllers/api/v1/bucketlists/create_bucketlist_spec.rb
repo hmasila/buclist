@@ -5,7 +5,7 @@ RSpec.describe "Create a bucketlist", type: :request do
   let(:params) { attributes_for(:bucketlist) }
   let(:header) { valid_headers(user.id) }
 
-  let!(:req) { post "/bucketlists", params: params, headers: header }
+  let!(:request) { post "/bucketlists", params: params, headers: header }
   subject { response }
 
   context "when a bucket has valid attributes" do

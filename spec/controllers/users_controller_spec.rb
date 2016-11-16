@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe UsersController, type: :controller do
   describe "POST#create" do
     let(:attrs) { attributes_for(:user) }
-    let!(:req) { post :create, params: attrs }
+    let!(:request) { post :create, params: attrs }
     let!(:existing_user) { create(:user) }
     subject { response }
 

@@ -6,7 +6,7 @@ RSpec.describe "Display a bucketlist", type: :request do
   let(:id) { bucket.id }
   let(:header) { valid_headers(user.id) }
 
-  let!(:req) { get "/bucketlists/#{id}", params: {}, headers: header }
+  let!(:request) { get "/bucketlists/#{id}", params: {}, headers: header }
   subject { response }
 
   context "when the bucket exists" do

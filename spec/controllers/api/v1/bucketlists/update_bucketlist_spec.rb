@@ -7,7 +7,7 @@ RSpec.describe "Update a bucketlist", type: :request do
   let(:header) { valid_headers(user.id) }
   let(:params) { { name: "updated bucketlist" } }
 
-  let!(:req) { put "/bucketlists/#{id}", params: params, headers: header }
+  let!(:request) { put "/bucketlists/#{id}", params: params, headers: header }
   subject { response }
 
   context "when the bucket exists" do

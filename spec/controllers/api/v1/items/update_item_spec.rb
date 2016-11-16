@@ -9,7 +9,7 @@ RSpec.describe "bucketlist items", type: :request do
     let(:params) { { name: "StarWars" } }
     let(:header) { valid_headers(user.id) }
 
-    let!(:req) do
+    let!(:request) do
       put "/bucketlists/1/items/#{id}", params: params, headers: header
     end
 

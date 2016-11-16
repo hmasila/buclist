@@ -8,7 +8,7 @@ RSpec.describe " Show bucketlist item", type: :request do
     let(:id) { item.id }
     let(:header) { valid_headers(user.id) }
 
-    let!(:req) do
+    let!(:request) do
       get "/bucketlists/1/items/#{id}", params: {}, headers: header
     end
 

@@ -6,7 +6,7 @@ RSpec.describe "List all bucketlists", type: :request do
   let(:header) { valid_headers(user.id) }
   let(:params) {}
 
-  let!(:req) { get "/bucketlists", params: params, headers: header }
+  let!(:request) { get "/bucketlists", params: params, headers: header }
   subject { response }
 
   context "without pagination params" do

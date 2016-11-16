@@ -10,7 +10,7 @@ RSpec.describe AuthenticationController, type: :controller do
         password: user.password
       }
     end
-    let!(:req) { post :login, params: params }
+    let!(:request) { post :login, params: params }
 
     context "when a user logs in" do
       it_behaves_like "a http response", 200, "Logged in successfully"
@@ -29,7 +29,7 @@ RSpec.describe AuthenticationController, type: :controller do
 
   describe "GET #logout", type: :request do
     let(:header) { valid_headers(user.id) }
-    let!(:req) { get "/auth/logout", params: {}, headers: header }
+    let!(:request) { get "/auth/logout", params: {}, headers: header }
 
     context "when user tries to logout" do
       it "logs out the user" do

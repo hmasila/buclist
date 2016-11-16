@@ -6,7 +6,7 @@ RSpec.describe "Delete a bucketlist", type: :request do
   let(:id) { bucket.id }
   let(:header) { valid_headers(user.id) }
 
-  let!(:req) { delete "/bucketlists/#{id}", params: {}, headers: header }
+  let!(:request) { delete "/bucketlists/#{id}", params: {}, headers: header }
   subject { response }
 
   context "when the bucket exists" do

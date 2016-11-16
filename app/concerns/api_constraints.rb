@@ -6,11 +6,13 @@ class ApiConstraints
     @default = options[:default]
   end
 
-  def matches?(req)
-    @default || check_headers(req)
+  def matches?(request)
+    @default || check_headers(request)
   end
 
-  def check_headers(req)
-    req.headers["Accept"].include?("application/vnd.buclist.v#{@version}+json")
+  def check_headers(request)
+    request.
+      headers["Accept"].
+      include?("application/vnd.buclist.v#{@version}+json")
   end
 end

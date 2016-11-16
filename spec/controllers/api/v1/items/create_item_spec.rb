@@ -7,7 +7,7 @@ RSpec.describe "Create an item", type: :request do
     let(:params) { { name: "StarWars" } }
     let(:header) { valid_headers(user.id) }
 
-    let!(:req) do
+    let!(:request) do
       post "/bucketlists/1/items", params: params, headers: header
     end
 

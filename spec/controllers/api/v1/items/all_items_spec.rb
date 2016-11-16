@@ -8,7 +8,7 @@ RSpec.describe "bucketlist items", type: :request do
     let(:header) { valid_headers(user.id) }
     let(:params) {}
 
-    let!(:req) { get "/bucketlists/1/items", params: params, headers: header }
+    let!(:request) { get "/bucketlists/1/items", params: params, headers: header }
     context "without pagination params" do
       it_behaves_like("pagination without params", Item)
     end
