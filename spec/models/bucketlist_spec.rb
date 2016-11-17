@@ -31,7 +31,7 @@ RSpec.describe Bucketlist, type: :model do
       limit = 20
       page = 1
       expect(Bucketlist.paginate(limit, page)).to eq(
-        Bucketlist.limit(20).offset(0)
+        Bucketlist.limit(20).order("id ASC").offset(0)
       )
     end
   end

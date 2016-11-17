@@ -12,7 +12,7 @@ RSpec.describe Item, type: :model do
       limit = 20
       page = 1
       expect(Item.paginate(limit, page)).to eq(
-        Item.limit(20).offset(0)
+        Item.limit(20).order("id ASC").offset(0)
       )
     end
   end

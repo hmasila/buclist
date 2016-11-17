@@ -5,7 +5,7 @@ module Pagination
   def paginate(limit, page)
     @limit = limit.to_i
     @page = page.to_i
-    limit(get_limit).offset(get_offset)
+    limit(get_limit).order("id ASC").offset(get_offset)
   end
 
   private
