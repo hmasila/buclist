@@ -33,15 +33,15 @@ Source code - github.com/andela-hmasila/buclist.
 
 ## Getting Started
 
-     1. `git clone https://github.com/andela-hmasila/buclist.git`
+    1. git clone https://github.com/andela-hmasila/buclist.git
 
-    2. `cd buclist`
+    2. cd buclist
 
-    3. `bundle install`
+    3. bundle install
 
-    4. `rails db:setup`
+    4. rails db:setup
 
-    5. `rails server`
+    5. rails server
 
 
 ## Tests
