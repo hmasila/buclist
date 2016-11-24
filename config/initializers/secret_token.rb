@@ -1,0 +1,1 @@
+Buclist::Application.config.secret_token = "97940f8bd84a213df0fde9288ea47982b838d4121528bf9ce7cc8c3bdc33a330f2871b8966ba36244b79cef6c859962ec744acc4f658419709deb557cc08ea7a"
